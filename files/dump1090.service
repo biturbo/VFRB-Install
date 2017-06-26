@@ -1,0 +1,14 @@
+[Unit]
+Description=DUMP1090 service
+After=network.target
+
+[Service]
+Type=forking
+WorkingDirectory = /home/pi/opt/dump1090
+PIDFile=/var/run/dump1090.pid
+ExecStart=/home/pi/opt/dump1090/dump1090 --device-index 0 --quiet --net --fix --modeac --lat 47.582 --lon 8.878 --max-range 300
+Restart=always
+TimeoutSec=60
+
+[Install]
+WantedBy=multi-user.target
