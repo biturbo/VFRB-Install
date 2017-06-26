@@ -171,10 +171,10 @@ echo "${GREEN}...done${WHITE}"
 
 
 ##############################################################
-##  PCAS build and installation
+##  dump1090 build and installation
 ##############################################################
 echo
-echo "${YELLOW}**** PCAS build and installation... *****${WHITE}"
+echo "${YELLOW}**** dump1090 build and installation... *****${WHITE}"
 
 cd /home/pi/opt
 
@@ -189,7 +189,27 @@ cp -f dump1090 /usr/bin
 echo "${GREEN}...done${WHITE}"
 
 ##############################################################
-## Copying dump1090.sh / gpsd
+##  VFR-B build and installation
+##############################################################
+echo
+echo "${YELLOW}**** VFR-B build and installation... *****${WHITE}"
+
+cd /home/pi/opt
+
+rm -rf VirtualFlightRadar-Backend
+git clone https://github.com/Jarthianur/VirtualFlightRadar-Backend.git
+
+rm -rf vfrb.ini
+cp ${SCRIPTDIR}/files/vfrb.ini /home/pi/opt/VirtualFlightRadar-Backend/vfrb.ini
+
+cd VirtualFlightRadar-Backend
+./install.sh
+./install.sh service 
+
+echo "${GREEN}...done${WHITE}"
+
+##############################################################
+## Copying dump1090.sh / gpsd files
 ##############################################################
 echo
 echo "${YELLOW}**** Copying the dump1090.sh and GPSD utility... *****${WHITE}"
