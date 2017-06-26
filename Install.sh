@@ -93,20 +93,25 @@ echo "${GREEN}...done${WHITE}"
  apt-get install -y libusb-1.0-0.dev build-essential mercurial autoconf fftw3 fftw3-dev libtool libfftw3-dev 
  apt-get remove -y hostapd
  apt-get install -y hostapd
- apt-get install -y gpsd gpsd-clients procserv nano libconfig-dev libconfig9 
+ apt-get install -y gpsd gpsd-clients python-gps procserv nano libconfig-dev libconfig9 
  apt-get install -y libgps-dev minicom telnet gedit
  apt-get install -y libboost-dev libboost-system-dev libboost-thread-dev libboost-regex-dev libboost-chrono-dev libboost-signals-dev
+ apt-get install -y scons libncurses5-dev python-dev pps-tools
+ apt-get install -y git-core
+
  apt-get autoremove -y
  
  systemctl stop gpsd.socket
  systemctl disable gpsd.socket
+ 
+ systemctl stop hciuart 
  systemctl disable hciuart
  
  chmod 755 rpi.sh
  chmod 755 flightbox-wifi.sh
  chmod 755 wifi-ap.sh
  chmod 755 ogn-setup.sh
-
+ chmod 755 gpsd-setup.sh
 
 # ##############################################################
 # ##  Hardware check
@@ -267,6 +272,16 @@ echo
 echo "${YELLOW}**** OGN setup... *****${WHITE}"
 
 . ${SCRIPTDIR}/ogn-setup.sh
+
+echo "${GREEN}...done${WHITE}"
+
+##############################################################
+##  GPSD setup
+##############################################################
+echo
+echo "${YELLOW}**** OGN setup... *****${WHITE}"
+
+. ${SCRIPTDIR}/gpsd-setup.sh
 
 echo "${GREEN}...done${WHITE}"
 
