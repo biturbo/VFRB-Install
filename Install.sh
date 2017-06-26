@@ -83,11 +83,10 @@ echo "${GREEN}...done${WHITE}"
  apt-get remove -y libpam-chksshpwd
  apt-get autoremove -y
 
-# apt-get update -y apt-mark hold plymouth
  apt-get dist-upgrade -y
  apt-get upgrade -y
+ 
  apt-get install -y git
-# git config --global http.sslVerify false
  apt-get install -y iw lshw wget isc-dhcp-server tcpdump cmake automake pkg-config libjpeg-dev 
  apt-get install -y i2c-tools 
  apt-get install -y libusb-1.0-0.dev build-essential mercurial autoconf fftw3 fftw3-dev libtool libfftw3-dev 
@@ -101,8 +100,8 @@ echo "${GREEN}...done${WHITE}"
 
  apt-get autoremove -y
  
- systemctl stop gpsd.socket
- systemctl disable gpsd.socket
+ #systemctl stop gpsd.socket
+ #systemctl disable gpsd.socket
  
  systemctl stop hciuart 
  systemctl disable hciuart

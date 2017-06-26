@@ -4,7 +4,7 @@
 
 echo "${MAGENTA}"
 echo "************************************"
-echo "**** ognd install and setup... ******"
+echo "**** GPSD install and setup... ******"
 echo "************************************"
 echo "${WHITE}"
 
@@ -14,13 +14,21 @@ echo "${WHITE}"
 echo
 echo "${YELLOW}**** GPSD install and config... *****${WHITE}"
 
-cd /home/pi/opt
-rm -rf gpsd-3.16.tar.gz
+#cd /home/pi
 
-wget http://download.savannah.gnu.org/releases/gpsd/gpsd-3.16.tar.gz
-tar xvf gpsd-3.16.tar.gz
-cd gpsd-3.16
-scons && scons check && scons udev-install
+#git clone https://git.savannah.nongnu.org/git/gpsd.git
+#cd gpsd
+
+ln -s /lib/systemd/system/gpsd /etc/systemd/system/multi-user.target.wants/
+ln -s /lib/systemd/system/gpsd.service /etc/systemd/system/multi-user.target.wants/
+ls -la /etc/systemd/system/multi-user.target.wants/gpsd
+
+
+#rm -rf gpsd-3.16.tar.gz
+#wget http://download.savannah.gnu.org/releases/gpsd/gpsd-3.16.tar.gz
+#tar xvf gpsd-3.16.tar.gz
+#cd gpsd-3.16
+#scons && scons check && scons udev-install
 
 
 echo "${GREEN}...done${WHITE}"
