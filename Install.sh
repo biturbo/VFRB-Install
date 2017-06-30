@@ -88,10 +88,10 @@ echo "${GREEN}...done${WHITE}"
  
  apt-get install -y git
  apt-get install -y iw lshw wget isc-dhcp-server tcpdump cmake automake pkg-config libjpeg-dev 
- apt-get install -y i2c-tools 
+ apt-get install -y i2c-tools libapr1 libapr1-dev
  apt-get install -y libusb-1.0-0.dev build-essential mercurial autoconf fftw3 fftw3-dev libtool libfftw3-dev 
  apt-get remove -y hostapd
- apt-get install -y hostapd
+ apt-get install -y hostapd 
  apt-get install -y gpsd gpsd-clients python-gps procserv nano libconfig-dev libconfig9 
  apt-get install -y libgps-dev minicom telnet gedit
  apt-get install -y libboost-dev libboost-system-dev libboost-thread-dev libboost-regex-dev libboost-chrono-dev libboost-signals-dev
@@ -106,8 +106,12 @@ echo "${GREEN}...done${WHITE}"
  systemctl stop hciuart 
  systemctl disable hciuart
  
+ pip install pynmea2
+ pip install telnetsrv
+ 
+  
  chmod 755 rpi.sh
- chmod 755 flightbox-wifi.sh
+ chmod 755 bmpserver.sh
  chmod 755 wifi-ap.sh
  chmod 755 ogn-setup.sh
  chmod 755 gpsd-setup.sh
@@ -211,6 +215,30 @@ cd VirtualFlightRadar-Backend
 ./install.sh service 
 
 echo "${GREEN}...done${WHITE}"
+
+##############################################################
+##  BMP280 Server for VFR-B build and installation
+##############################################################
+echo
+echo "${YELLOW}**** BMP280 Server for VFR-B build and installation... *****${WHITE}"
+
+cd /home/pi/opt
+mkdir bmp280
+chmod 755 ${SCRIPTDIR}/files/server.py
+chmod 755 ${SCRIPTDIR}/files/BMP280.py
+cp ${SCRIPTDIR}/files/server.py	/home/pi/opt/bmp280/server.py
+cp ${SCRIPTDIR}/files/BMP280.py	/home/pi/opt/bmp280/BMP280.py
+
+chmod 755 ${SCRIPTDIR}/files/bmpserver.sh
+cp ${SCRIPTDIR}/files/bmpserver.sh /etc/init.d/bmpserver.sh
+systemctl enable bmpserver.sh
+systemctl daemon-reload 
+
+chmod 755 ${SCRIPTDIR}/files/nmea.py
+cp ${SCRIPTDIR}/files/nmea.py /usr/local/lib/python2.7/dist-packages/pynmea2/nmea.py
+
+echo "${GREEN}...done${WHITE}"
+
 
 ##############################################################
 ## Copying dump1090.sh / gpsd files
