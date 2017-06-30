@@ -42,7 +42,7 @@ MACHINE="$(uname -m)"
 
 echo "${MAGENTA}"
 echo "**************************************"
-echo "**** FlightBox Setup Starting... *****"
+echo "**** FlightRadar Setup Starting... *****"
 echo "**************************************"
 echo "${WHITE}"
 
