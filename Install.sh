@@ -111,7 +111,6 @@ echo "${GREEN}...done${WHITE}"
  
   
  chmod 755 rpi.sh
- chmod 755 bmpserver.sh
  chmod 755 wifi-ap.sh
  chmod 755 ogn-setup.sh
  chmod 755 gpsd-setup.sh
